@@ -66,3 +66,31 @@ otooley = []
         winner = "Li"
     else:
         winner = "O'Tooley"
+
+#Print out to Terminal
+print ("Election Results")
+print ("-------------------------------------------")
+print ("Total Votes: " + str(total_votes))
+print ("-------------------------------------------")
+print ("Khan: " + str(khan_percent) + "%" + " (" + str(khan_votes) + ")")
+print ("Correy: " + str(correy_percent) + "%" + " (" + str(correy_votes) + ")")
+print ("Li: " + str(li_percent) + "%" + " (" + str(li_votes) + ")")
+print ("O'Tooley: " + str(otooley_percent) + "%" + " (" + str(otooley_votes) + ")")
+print ("-------------------------------------------")
+print ("Winner: " + str(winner))
+print ("-------------------------------------------")
+
+#Print results into text file
+sys.stdout = open ("pypoll.txt", "w")
+print ("Election Results")
+print ("----------------------------------------")
+print ("Total Votes: " + str(total_votes))
+print ("----------------------------------------")
+print ("Khan: " + str(khan_percent) + "%" + "(" + str(khan_votes) + ")")
+print ("Correy: " + str(correy_percent) + "%" + " (" + str(correy_votes) + ")")
+print ("Li: " + str(li_percent) + "%" + " (" + str(li_votes) + ")")
+print ("O'Tooley: " + str(otooley_percent) + "%" + " (" + str(otooley_votes) + ")")
+print ("-------------------------------------------")
+print ("Winner: " + str(winner))
+print ("-------------------------------------------")
+sys.stdout.close()
