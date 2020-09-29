@@ -1,23 +1,23 @@
 #import polling data to begin analysis
 import os
-import cvs
+import csv
 import sys
 
 #set up directory to the polling data
-csv.path=os.path.join('Resources', 'election_data.csv')
-with open (csvpath, newline='') as cvsfile:
-    csvreader = csv.reader(csvfile, delimiter ',')
-
-#print (csv_reader)
-csv_header = next(csvreader)
+csvpath=os.path.join('Resources', 'election_data.csv')
+with open (csvpath, newline='') as csvfile:
+    csvreader = csv.reader(csvfile, delimiter = ',')
+    #print (csv_reader)
+    csv_header = next(csvreader)
 
 #declare variables
-votes = []
-county = []
-candidates = []
-khan = []
-correy = []
-otooley = []
+    votes = []
+    county = []
+    candidates = []
+    khan = []
+    correy = []
+    li = []
+    otooley = []
 
 #Transfer data into variables for each row
     for row in csvreader:
@@ -25,21 +25,24 @@ otooley = []
         county.append(row[1])
         candidates.append(row[2])
 
+#Determine total number of votes
+    total_votes = (len(votes))
+    #print (total_votes)
+
 #Calculate number of votes per person
     for candidate in candidates:
-        if candidate = "Khan":
-        khan.append(candidates)
-        khan_votes = len(khan)
-    elif candidate == "Correy":
-        correy.append(candidates)
-        correy_votes = len(correy)
-    elif candidate == "Li":
-        li.append(candidates)
-        li_votes = len(i)
-    else:
-        otooley.append(candidates)
-        otooley_votes = len(otooley)
-
+        if candidate == "Khan":
+            khan.append(candidates)
+            khan_votes = len(khan)
+        elif candidate == "Correy":
+            correy.append(candidates)
+            correy_votes = len(correy)
+        elif candidate == "Li":
+            li.append(candidates)
+            li_votes = len(li)
+        else:
+            otooley.append(candidates)
+            otooley_votes = len(otooley)
 #print out candidates
 #print (khan_votes)
 #print (correy_votes)
@@ -48,9 +51,9 @@ otooley = []
 
 #Calculate the percentage of votes per person:
     khan_percent = round(((khan_votes / total_votes) * 100), 2)
-    correy_percent = round(((correy_votes / total_votes) * 100),2)
+    correy_percent = round(((correy_votes / total_votes) * 100), 2)
     li_percent = round(((li_votes / total_votes)* 100), 2)
-    otooley_percent = round(((otooley_votes / total_votes)*100),2)
+    otooley_percent = round(((otooley_votes / total_votes)*100), 2)
 
 #print (khan_percent)
 #print (correy_percent)
