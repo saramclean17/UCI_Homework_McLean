@@ -1,0 +1,7 @@
+Financial Analysis
+-----------------------------------------
+Total number of months: 5
+Total revenue in period: $38382578
+Average monthly change in revenue: $-2315.12
+Greatest increase in profits: Feb-2012 ($1926159)
+Greatest decrease in profits: Sep-2013, ($-2196167
