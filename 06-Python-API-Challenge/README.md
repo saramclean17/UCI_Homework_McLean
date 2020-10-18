@@ -1,5 +1,18 @@
 # Python API Homework - What's the Weather Like?
 
+## WeatherPy Summary - Draft 1 copy for review
+
+
+For this project, to create a representative model of weather across world cities, we are trying to see if there is any trend between location and temperature, wind speed, cloudiness, and humidity as we get closer to the equator. Using randomly selected 500+ unique cities around the world based on latitude and longitude information, created plots to visualize the relations. We needed to use wide range of cities to get relaible data.
+Looking at the latitude and maximum temprature plot we can say as cities get closer to the equator, tempratures tend to get higher. So we can conclude that, there is a trend between latitude and temprature as we get closer to the equator.
+For humidity, the plot doesn't show any relation between latitude and humidity. Humidity doesn't get higher or lower as we get closer to the equator. Different latitudes can have similar humidity rates, or similar latidues can have different humidity rates.
+For cloudiness, again we can't point any relation between latitude and cloudiness as we get closer to the equator. Cities that are closer to the equator don't show any trend like they have any similarity for cloudiness.
+For wind speed, the plot shows cities that have very diffirent latitudes can have similar wind speeds, and similar latitudes doesn't necessarily have the similar wind speeds. So we can say latitude and wind speed doesn't create a trend.
+
+
+
+
+
 ## Background
 
 Whether financial, political, or social -- data's true power lies in its ability to answer questions definitively. So let's take what you've learned about Python requests, APIs, and JSON traversals to answer a fundamental question: "What's the weather like as we approach the equator?"
