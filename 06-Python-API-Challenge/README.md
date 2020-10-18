@@ -2,6 +2,7 @@
 
 ## WeatherPy Summary - Draft 1 copy for review
 
+ - as we apporoach the equator the temperature increases and there is no relationship between latitude and wind speed, cloudiness, Humidity.
 
 For this project, to create a representative model of weather across world cities, we are trying to see if there is any trend between location and temperature, wind speed, cloudiness, and humidity as we get closer to the equator. Using randomly selected 500+ unique cities around the world based on latitude and longitude information, created plots to visualize the relations. We needed to use wide range of cities to get relaible data.
 Looking at the latitude and maximum temprature plot we can say as cities get closer to the equator, tempratures tend to get higher. So we can conclude that, there is a trend between latitude and temprature as we get closer to the equator.
