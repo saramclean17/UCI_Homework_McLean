@@ -7,10 +7,13 @@ Based on the random data of cities obtained, the following observations can be m
 3. The latitude has relatively little to no relationship with cloudiness & wind speed as noted within the limits of the data set. There are a couple of noted anomalies in the southern hemispher plot outcomes noted below but overall the data shows little to no relationships between latitude vs cloudiness and wind speed.
 
 Maps Outcomes
-The Latitude vs Temperature Plot shows that the further you move from the equator, the temperature drops.
-The Latitude vs Cloudiness Plot shows no real pattern between cloudiness and latitude.
-The Latitude vs Wind Speed Plot shows no real pattern between wind speed and latitude.
-Northern Hemisphere Plots
+1. The Latitude vs Temperature Plot shows that the further you move from the equator, the temperature drops.
+
+2. The Latitude vs Cloudiness Plot shows no real pattern between cloudiness and latitude.
+
+3. The Latitude vs Wind Speed Plot shows no real pattern between wind speed and latitude.
+
+4. Northern Hemisphere Plots
     Max Temp vs Latitude Linear Regression Model
       The regression displays a negative correlation.
       In the northern hemisphere, the temperature decreases as you move away from the equator.
@@ -22,7 +25,8 @@ Northern Hemisphere Plots
     Wind Speed vs Latitude Linear Regression Model
       The regression displays no real correlation between the wind speed and latitude. 
       Wind speeds are fairly consistent along all latitude data points.
-Southern Hemisphere Plots
+      
+5. Southern Hemisphere Plots
     Max Temp vs Latitude Linear Regression Model
       The regression displays a positive correlation.
       In the southern hemisphere, the temperature increases as you get closer to the equator.
