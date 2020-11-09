@@ -32,6 +32,8 @@ The last step was to create my query.sql to answer the eight questions posed.
 ![](images/DataHerculesB0.png)
 
 6.List all employees in the Sales department, including their employee number, last name, first name, and department name.
+![](images/DataSalesDeptEmployees0.png)
+
 7.List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
 8.In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 
