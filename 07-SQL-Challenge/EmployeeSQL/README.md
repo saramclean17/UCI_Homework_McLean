@@ -6,8 +6,6 @@ Process
 The intial part of my process involved creating an ERD using the new software program shown in class called QuickDBD. This allowed me to view the
 relationships between each of the CSV files.
 
-![](EmployeeSQL/QuickDBD-EMPSQL.png)
-
 The next step was to create my schema.sql which created the requested tables and allowed me to import each of the CSV files. 
 
 The last step was to create my query.sql to answer the eight questions posed:
