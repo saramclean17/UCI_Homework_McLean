@@ -20,6 +20,9 @@ The last step was to create my query.sql to answer the eight questions posed:
 ![](images/1986Employees.png)
 
 3.List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name.
+
+![](images/DataManagerDeptInfo0.png)
+
 4.List the department of each employee with the following information: employee number, last name, first name, and department name.
 5.List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
 6.List all employees in the Sales department, including their employee number, last name, first name, and department name.
