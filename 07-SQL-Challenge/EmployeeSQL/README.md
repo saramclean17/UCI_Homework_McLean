@@ -40,4 +40,6 @@ The last step was to create my query.sql to answer the eight questions posed.
 
 8.In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 
+![](images/DataLastNameCounts0.png)
+
 
