@@ -12,6 +12,8 @@ The next step was to create my schema.sql which created the requested tables and
 
 The last step was to create my query.sql to answer the eight questions posed:
 1.List the following details of each employee: employee number, last name, first name, sex, and salary.
+
+
 2.List first name, last name, and hire date for employees who were hired in 1986.
 3.List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name.
 4.List the department of each employee with the following information: employee number, last name, first name, and department name.
