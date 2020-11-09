@@ -10,7 +10,8 @@ relationships between each of the CSV files.
 
 The next step was to create my schema.sql which created the requested tables and allowed me to import each of the CSV files. 
 
-The last step was to create my query.sql to answer the eight questions posed:
+The last step was to create my query.sql to answer the eight questions posed.
+
 1.List the following details of each employee: employee number, last name, first name, sex, and salary.
 
 ![](images/DataEmployeeDetails0.png)
