@@ -5,7 +5,8 @@ The goal of the SQL homework was to analyze employee information through several
 Process
 The intial part of my process involved creating an ERD using the new software program shown in class called QuickDBD. This allowed me to view the
 relationships between each of the CSV files.
-![ERD](EmployeeSQL/QuickDBD-EMPSQL.png)
+
+![](EmployeeSQL/QuickDBD-EMPSQL.png)
 
 The next step was to create my schema.sql which created the requested tables and allowed me to import each of the CSV files. 
 
