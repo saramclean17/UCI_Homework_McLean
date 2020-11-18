@@ -21,7 +21,11 @@ After this, I designed a query to calculate the total number of observation stat
 ![](Images/Station_Analysis.png)
 
 
-A bonus part of this assignment was to analyze the average temperatures of Hawaii during the trip period in order to try and predict the weather for the trip. 
+A bonus part of this assignment was to analyze the average temperatures and precipitation of Hawaii during the trip period in order to try and predict the weather for the trip. After querying, I plotted the results.
+
+![](Images/TripTempSummary.png)
+
+![](Images/Trip_Temps.png)
 
 
 ## Climate App
