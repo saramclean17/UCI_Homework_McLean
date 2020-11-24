@@ -1,136 +1,126 @@
+/* Body */
 body{
-    background:#D3D3D3;
-    font-family: sans-serif;
-    font-size:1em;
+  background-color: #EDEDED; 
 }
-.page-text{
-    background:#FFFFFF;
-    padding-top:30px;
-    padding-bottom:10px;
-    padding-left:20px;
-    padding-right:20px;
-}
-hr{
-    color:#778899;
-}
-
-/* NAVBAR formats----------------------------------------- */
+/* Navbar */
 .navbar{
-    background:#FFFFFF;
-    width:100%;
-    padding:0;
+  max-height: 57px; 
 }
-.navbar-light .navbar-brand{
-    /* surrounding */
-    margin-left:2%;
-    padding:10px;
-    min-height:50px;
-    background:#48D1CC;
-    /* font */
-    font-size:32px;
-    font-weight:bold;
-    color:#FFFFFF;
-    text-decoration:none;
+.navigation .navbar-brand{
+  color: white; 
+  margin-left: 30px; 
+  padding: inherit; 
+  font-weight: bold; 
+  background-color: #0BADA6;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.navbar-nav{
-    position:absolute;
-    right:2%;
-    z-index:10;
+.navbar{
+  background-color: white; 
+  font-size: 15px; 
 }
-.nav-item{
-    padding:10px;
-    background:#FFFFFF;
-    color:#778899;
-    font-weight:bold;
-}
-.dropdown-menu{
-    border:none;
+.active, .dropdown-menu .dropdown-item:active a:hover{
+  background-color:#E7E7E7!important; 
 }
 .dropdown-item{
-    background:#FFFFFF;
-    color:#778899;
+  color: #6D8092 !important; 
+}
+.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover{
+  background-color:#E7E7E7 !important; 
+}
+a{
+  color: #6D8092;
+  font-size: 15px; 
+}
+.nav-link:hover{
+  background-color:#E7E7E7 !important;
+ }
+
+.navbar-brand:hover{
+color: rgb(175, 175, 175) !important;
+}
+/* Images */
+img{
+  width:100% !important;
+  height:100% !important;
+}
+.active, .panel:hover{
+  border-color:#0BADA6;
+  border-style: solid; 
+  
+}
+.vizualization{
+  width:50% !important;
+  height:50% !important;
 }
 
-
-/* BODY TEXT INFO formats----------------------------------------- */
-.row{
-    padding-top:50px;
+/* Title Class  */
+.title{
+  color: #0BADA6;  
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bolder; 
+  padding-top: 25px; 
 }
-h1{
-    color:#48D1CC;
-    font-weight:bold;
-    font-size:28px;
-}
-.main-img{
-    width:60%;
-    margin: 0px 10px 0px 0px;
-    float:left;
-}
-.section-img{
-    width:75%;
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-}
+/* Paragraph Element */
 p{
-    line-height:1.5;
-    color:#778899;
-    margin-top:20px;
-    margin-bottom:20px;
+color: #6D8092;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 17px; 
+}
+/* Box Class */
+.box {
+  margin-top: 60px; 
+  margin-bottom: 62px; 
+  padding: 10px 20px 15px; 
+  color:black;
+  background-color: white; 
+
+}
+/* Table */
+.table{
+  font-size: 15px; 
+  border-top-color: white !important; 
+}
+/* Footer */
+footer{
+background-color: #666666; 
+border-top-style: solid; 
+border-top-width: 5px; 
+border-top-color: #0BADA6;
+color: white; 
+min-height: 55px; 
+font-family: Arial, Helvetica, sans-serif;
+font-size: 15px; 
+text-align: center; 
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+padding-top: 15px; 
+}
+/* Media Queries */
+@media(max-width: 992px){
+.navbar-expand-lg{
+background-color: #0BADA6 !important;
+}
+.navbar{
+  max-height: none; 
+  padding: inherit;
+}
+.navbar div{
+  margin: inherit; 
+  background-color: white;  
+}
+.navbar-brand{
+  padding: 10px !important; 
 }
 
-/* Visualization formatting----------------------------------------- */
-h2{
-    color:#48D1CC;
-    font-weight:bold;
-    font-size:24px;
+button{
+  margin-right: 30px; 
 }
-h3{
-    color:#48D1CC;
-    font-weight:bold;
-    font-size:16px;
-    text-align:center;
-}
-.image{
-    padding:20px;
-}
-/* resource https://www.codegrepper.com/code-examples/html/how+to+sort+image+in+html+into+a+2x2+grid */
-.visual-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-.visual-container .image {
-    width: 50%;
-}
-.visual-container img {
-    width: calc(100% - (20px * 2));
-    margin-left: 20px;
-    margin-right:20px;
-}
+button:focus {
 
-/* TABLE formats----------------------------------------- */
-table{
-    height:600px;
-}
-
-/* MEDIA formats----------------------------------------- */
-@media only screen and (max-width:768px){
-    .navbar, .nav-item{
-        background:#48D1CC;
-        color:#FFFFFF;
-        width:100%;
-    }
-    .navbar-light .navbar-nav .nav-link{
-        background:#48D1CC;
-        color:#FFFFFF;
-    }
-    .dropdown-menu{
-        background:#48D1CC;
-        border:none;
-        width:100%;
-    }
-    .dropdown-item{
-        background:#48D1CC;
-        color:#FFFFFF;
-    }
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focusring-color;
+  
+  }
 }
