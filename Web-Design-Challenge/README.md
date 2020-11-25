@@ -15,4 +15,4 @@ Included in this HTML assignment is a total of 7 HTML pages:
 
 I used the cities.csv as my data set, converting to HTML using a Pandas conversion to HTML function. Using Jupyter NB, the code to convert the data is stored in data_conversion.ipynb and the outcome, or converted data, is stored in a file called raw_data.html. 
 
-The final HTML, file:///Users/saramclean1971/Desktop/WEBHW/uci-irv-data-pt-08-2020-u-c-master-02-Homework-11-Web-Instructions/02-Homework/11-Web/Instructions/index.html, showcases the final work project of all the coding pages. 
+The final file (file:///Users/saramclean1971/Desktop/WEBHW/uci-irv-data-pt-08-2020-u-c-master-02-Homework-11-Web-Instructions/02-Homework/11-Web/Instructions/index.html), showcases the final work project of all the coding pages. Along with this, I created a Github webpage to house the work output at https://saramclean17.github.io/index.html.
