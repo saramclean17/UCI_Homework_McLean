@@ -1,0 +1,14 @@
+# Web Design Homework - Web Visualization Dashboard (Latitude)
+
+For this homework I was asked to create a visualization dashboard website using visualizations I had created in a past assignment -- specifically, plotting weather data.
+
+In building this dashboard, I had to create individual pages for each plot and a means to navigate between them. These pages contain the visualizations and their corresponding explanations. I also created a landing page, a page to see a comparison of all of the plots, and another page to view the data used to build them. 
+
+Included in this HTML assignment is a total of 7 HTML pages:
+1. Landing Page
+2. Comparison Page
+3. Cloudiness Page
+4. Humidty Page
+5. Max Temperature Page
+6. Wind Speed Page
+
