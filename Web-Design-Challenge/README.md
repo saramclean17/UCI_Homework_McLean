@@ -11,6 +11,7 @@ Included in this HTML assignment is a total of 7 HTML pages:
 4. Humidty Page
 5. Max Temperature Page
 6. Wind Speed Page
+7. Data Page
 
 I used the cities.csv as my data set, converting to HTML using a Pandas conversion to HTML function. Using Jupyter NB, the code to convert the data is stored in data_conversion.ipynb and the outcome, or converted data, is stored in a file called raw_data.html. 
 
