@@ -5,7 +5,7 @@ In this assignment, I was asked to build a web application that scrapes various 
 Step 1: Scraping
 Step 2: MongoDB and Flask Application
 
-Step 1: Scraping
+##Step 1: Scraping
 
 Initial scraping of the following websites was completed using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter:
 
@@ -29,7 +29,7 @@ The full-resolution image url of each hemisphere
 The title of the hemisphere name
 The above two were saved into a Python dictionary
 
-Step 2: MongoDB and Flask Application
+##Step 2: MongoDB and Flask Application
 
 MongoDB with Flask templating was used to create a new HTML page that displays all of the information that was scraped from the URLs above. The following tasks were completed:
 
@@ -43,7 +43,7 @@ After scraping is complete, the /scrape route redirects to the /data route for d
 
 The /data route queries the Mongo database and passes the Mars data into an HTML template for display (data.html).
 
-Screenshots
+##Screenshots
 
 Landing page ('/')
 
