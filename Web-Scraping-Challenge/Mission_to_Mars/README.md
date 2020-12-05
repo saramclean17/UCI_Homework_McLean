@@ -43,7 +43,7 @@ After scraping is complete, the /scrape route redirects to the /data route for d
 
 The /data route queries the Mongo database and passes the Mars data into an HTML template for display (data.html).
 
-##Screenshots
+Screenshots
 
 Landing page ('/')
 
