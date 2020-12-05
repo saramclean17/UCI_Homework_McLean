@@ -9,7 +9,7 @@ collection = db.mars
 # Create an instance of Flask
 app = Flask(__name__)
 
- Route to render index.html template using data from Mongo
+# Route to render index.html template using data from Mongo
 @app.route('/')
 def home():
 	mars = collection.find_one()
