@@ -47,7 +47,7 @@ def scrape():
     murl = 'https://space-facts.com/mars/'
     table = pd.read_html(murl)
     mars_df = table[0]
-    mars_df =  mars_df[['Mars - Earth Comparison', 'Mars']]
+    mars_df =  mars_df[['Parameter', 'Mars']]
     mars_fact_html = mars_df.to_html(header=False, index=False)
 
     # Mars Hemispheres
