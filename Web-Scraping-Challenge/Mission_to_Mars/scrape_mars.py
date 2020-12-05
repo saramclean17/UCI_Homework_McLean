@@ -90,6 +90,7 @@ def scrape():
         'hemisphere_url': mhurl,
         }
     collection.insert(mars_data)
+    return mars_data
 
 
 
