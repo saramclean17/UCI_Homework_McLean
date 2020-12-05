@@ -1,22 +1,25 @@
-#import dependencies
-from bs4 import BeautifulSoup as bs
+#Import Dependencies
+import pymongo
+import requests
 from splinter import Browser
-import os
+from bs4 import BeautifulSoup as bs
 import pandas as pd
 import time
-from selenium import webdriver
-import pymongo
 
-#database set up
+##################################
+# Database Set Up
+################################## 
 
 client = pymongo.MongoClient('mongodb://localhost:27017')
 db = client.mars_db
 collection = db.mars 
 
+
 def init_browser():
     # @NOTE: Replace the path with your actual path to the chromedriver
     executable_path = {'executable_path': 'chromedriver.exe'}
     return Browser('chrome', **executable_path, headless=False)
+
 
 def scrape():
     browser = init_browser()
@@ -40,14 +43,14 @@ def scrape():
     feature_url = base_link+image_url
     featured_image_title = jpl_soup.find('h1', class_="media_feature_title").text.strip()
 
-# Mars facts
+    # Mars facts
     murl = 'https://space-facts.com/mars/'
     table = pd.read_html(murl)
     mars_df = table[0]
     mars_df =  mars_df[['Mars - Earth Comparison', 'Mars']]
     mars_fact_html = mars_df.to_html(header=False, index=False)
 
-# Mars Hemispheres
+    # Mars Hemispheres
     mhurl = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(mhurl)  
     mhtml = browser.html 
@@ -68,7 +71,8 @@ def scrape():
             product_dict['image_url']= image_url
             hemisphere_image_urls.append(product_dict)
 
- # Close the browser after scraping
+
+    # Close the browser after scraping
     browser.quit()
 
 
@@ -76,7 +80,7 @@ def scrape():
     mars_data ={
 		'news_title' : news_title,
 		'summary': news_para,
-        'featured_image': feature_url,
+    'featured_image': feature_url,
 		'featured_image_title': featured_image_title,
 		'fact_table': mars_fact_html,
 		'hemisphere_image_urls': hemisphere_image_urls,
@@ -85,5 +89,15 @@ def scrape():
         'fact_url': murl,
         'hemisphere_url': mhurl,
         }
-    collection.insert(mars_data)           
+    collection.insert(mars_data)
+
+
+
+
+
+
+
+
+
+
 
