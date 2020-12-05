@@ -36,8 +36,6 @@ A route called /scrape was created, that imports the scrape_mars.py script and c
 
 After scraping is complete, the /scrape route redirects to the /data route for display.
 
-Landing page ('/')
-
 Bootstrap CSS was used to create an initial landing page with a single button to begin scraping data by calling the /scrape route.
 
 The /scrape route redirects to a /data route that renders a second html template, created to display the scraped data using Bootstrap and custom CSS. This page also has a 'Scrape New Data' button that calls the /scrape route again if needed.
