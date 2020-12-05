@@ -10,20 +10,20 @@ Step 1: Scraping
 Initial scraping of the following websites was completed using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter:
 
 NASA Mars News Site: 
-The latest news title 
-The latest news paragraph text
+The latest news title. 
+The latest news paragraph text.
 
 JPL Featured Space Image:
-The image url for the current Featured Space image
-The title of the current Featured Space image
+The image url for the current Featured Space image.
+The title of the current Featured Space image.
 
 Mars Facts:
-The Mars facts table: Pandas was used to convert the data to a HTML table string
+The Mars facts table: Pandas was used to convert the data to a HTML table string.
 
 USGS Astrogeology:
-The full-resolution image url of each hemisphere
-The title of the hemisphere name
-The above two were saved into a Python dictionary
+The full-resolution image url of each hemisphere.
+The title of the hemisphere name.
+The above two were saved into a Python dictionary.
 
 Step 2: MongoDB and Flask Application
 MongoDB with Flask templating was used to create a new HTML page that displays all of the information that was scraped from the URLs above. The following tasks were completed:
