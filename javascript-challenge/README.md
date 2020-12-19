@@ -16,7 +16,7 @@ The data is provided by UCI Data Analytics Bootcamp.
 
 * Using multiple `input` tags and/or select dropdowns, wrote JavaScript code so the user can set multiple filters and search for UFO sightings using the following criteria based on the table columns noted in instructions:
 
-  1. `date/time`
+  1. `date and duration`
   2. `city`
   3. `state`
   4. `country`
