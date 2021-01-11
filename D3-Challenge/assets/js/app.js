@@ -1,433 +1,474 @@
 // @TODO: YOUR CODE HERE!
 // width and height for the svg
-const svgWidth =1000;
-const svgHeight =700;
+var width = parseInt(d3.select("#scatter").style("width"));
+var height = width - width / 3.9;
 
-let margin = {
-    top: 50,
-    right: 50,
-    bottom: 100,
-    left: 100
-};
+//set up chart canvas
+//margins
+var margin = 20;
+// labels padding
+var labelArea = 110;
 
-let width = svgWidth - margin.left - margin.right;
-let height = svgHeight - margin.top - margin.bottom;
+// padding for bottom and left axes
+var tPadBot = 40;
+var tPadLeft = 40;
 
-// Create an SVG wrapper, append an svg that will hold the chart
-let svg = d3
-	.select('#scatter')
-    .classed('chart',true)
-    .append('svg')
-    .attr('width', svgWidth)
-    .attr('height',svgHeight);
+//create canvas to place graph
+var svg = d3
+	.select("#scatter")
+	.append("svg")
+	.attr("width", width)
+	.attr("height", height)
+	.attr("class", "chart");
 
-// group SVG elements (shapes) together so they can be manipulated by left and top margins
-let chartGroup = svg
-	.append('g')
-    .attr('transform',`translate(${margin.left}, ${margin.top})`);
+//setting radius for each graph dot
+var circRadius;
+function crGet() {
+	if (width <= 530) {
+		circRadius = 5;
+	}
+}
+crGet();
 
-// View selection - changing this triggers transition
-var currentSelectionX = 'poverty',
-	currentSelectionY = 'healthcare';
+//labels for each axis
 
-// Returns a updated scale based on the current selection for X-axis.
-function xScale(data,currentSelectionX) {
-	var xLinearScale = d3.scaleLinear()
-		.domain([d3.min(data, d => parseInt(d[currentSelectionX]) *.9), 
-				d3.max(data, d => parseInt(d[currentSelectionX]) *1.1)
-			])
-		.range([0, width])
-	
-	return xLinearScale
-};
+//Bottom Axis
+//============
+svg.append("g").attr("class", "xText");
+var xText = d3.select(".xText");
 
-// Returns a updated scale based on the current selection for y-axis.
-function yScale(data,currentSelectionY) {
-	var yLinearScale = d3.scaleLinear()
-		.domain([d3.min(data, d => parseInt(d[currentSelectionY]) *.9), 
-				d3.max(data, d => parseInt(d[currentSelectionY]) *1.1)
-			])
-		.range([height, 0])
+//transforming xText to place at bottom of chart
+function xTextRefresh() {
+	xText.attr(
+		"transform",
+		"translate(" + ((width - labelArea)/2 + labelArea) + ", " + (height - margin - tPadBot) + ")"
+	);
+}
+xTextRefresh();
 
-	return yLinearScale
-};
+//use xText to append SVG files 
+//Poverty SVG file
+xText
+	.append("text")
+	.attr("y", -26)
+	.attr("data-name", "poverty")
+	.attr("data-axis", "x")
+	.attr("class", "aText active x")
+	.text ("In Poverty (%)");
 
-// Returns an updated x-axis based on x scale.
-function renderXAxes(newXScale, xAxis) {
-    var bottomAxis = d3.axisBottom(newXScale)
-  
-    xAxis
-      .transition()
-	  .duration(1000)
-	  .ease(d3.easeBack)
-      .call(bottomAxis)
-  
-    return xAxis
-  };
+//Age SVG file
+xText
+	.append("text")
+	.attr("y", 0)
+	.attr("data-name", "age")
+	.attr("data-axis", "x")
+	.attr("class", "aText inactive x")
+	.text ("Age (Median)");
 
-// Returns an updated y-axis based on y scale.
-function renderYAxes(newYScale, yAxis) {
-    var leftAxis = d3.axisLeft(newYScale)
-  
-    yAxis
-      .transition()
-	  .duration(1000)
-	  .ease(d3.easeBack)
-      .call(leftAxis)
-  
-    return yAxis
+//Income SVG file
+xText
+	.append("text")
+	.attr("y", 26)
+	.attr("data-name", "income")
+	.attr("data-axis", "x")
+	.attr("class", "aText inactive x")
+	.text ("Household Income (Median)");
 
-  };
-  
-  
-// Returns and appends an updated circles group based on a new scale and the currect selection.  
-function renderCircles(circlesGroup, newXScale, newYScale, currentSelectionX, currentSelectionY) {
+//Left Axis
+//specify y labels/text
+var leftTextX = margin + tPadLeft;
+var leftTextY = (height + labelArea)/2 - labelArea;
 
-    circlesGroup
-      .transition()
-	  .duration(1000)
-	  .ease(d3.easeBack)
-      .attr("cx", d => newXScale(d[currentSelectionX]))
-      .attr("cy", d => newYScale(d[currentSelectionY]))
-          
-    return circlesGroup
-  };
+//adding a second label group
+svg.append("g").attr("class","yText");
+var yText = d3.select(".yText");
 
-// Returns and appends an updated state abbr text group based on a new scale and the currect selection.   
-function renderText(textGroup, newXScale, newYScale, currentSelectionX, currentSelectionY) {
-   
-	textGroup
-    .transition()
-	.duration(1000)
-	.ease(d3.easeBack)
-    .attr("x", d => newXScale(d[currentSelectionX]))
-	.attr("y", d => newYScale(d[currentSelectionY]))
-	
-    return textGroup   
-  };
+//tranform function
+function yTextRefresh() {
+	yText.attr(
+	  "transform",
+	  "translate(" + leftTextX + ", " + leftTextY + ")rotate(-90)"
+	);
+  }
+yTextRefresh();
 
-// adding and updating tooltip to show more detail when you hover - NOT WORKING
-function updateToolTip(currentSelectionY,currentSelectionX,circlesGroup,textGroup) {
-	var toolTip = d3.tip()
-		.attr('class','d3-tip')
-		.offset([80, -60])
-		.html( d => {
-			if(currentSelectionX === "poverty")
-				return (`${d.state}<br>${currentSelectionY}:${d[currentSelectionY]}% 
-						<br>${currentSelectionX}:${d[currentSelectionX]}%`)
-			else if (currentSelectionX === 'income')
-				return (`${d.state}<br>${currentSelectionY}:${d[currentSelectionY]}% 
-						<br>${currentSelectionX}:$${d[currentSelectionX]}`)
-			else
-				return (`${d.state}<br>${currentSelectionY}:${d[currentSelectionY]}% 
-						<br>${currentSelectionX}:${d[currentSelectionX]}`)
-			});
+//y axis labels/text
+//Obesity SVG file
+yText
+  .append("text")
+  .attr("y", -26)
+  .attr("data-name", "obesity")
+  .attr("data-axis", "y")
+  .attr("class", "aText active y")
+  .text("Obese (%)");
 
-	circlesGroup.call(toolTip);
-	circlesGroup.on('mouseover', toolTip.show).on('mouseout', toolTip.hide);
+//Smoking SVG file
+yText
+  .append("text")
+  .attr("x", 0)
+  .attr("data-name", "smokes")
+  .attr("data-axis", "y")
+  .attr("class", "aText inactive y")
+  .text("Smokes (%)");
 
-	d3.selectAll('.stateText').call(toolTip);
-	d3.selectAll('.stateText').on('mouseover', toolTip.show).on('mouseout', toolTip.hide);
+//Healthcare SVG file
+yText
+  .append("text")
+  .attr("y", 26)
+  .attr("data-name", "healthcare")
+  .attr("data-axis", "y")
+  .attr("class", "aText inactive y")
+  .text("Lacks Healthcare (%)");
 
-	return circlesGroup;
-	return textGroup;
-};
+//Import CSV file
+//=================
+// This data file includes state-by-state demographic data from the US Census
+// and measurements from health risks obtained
+// by the Behavioral Risk Factor Surveillance System.
 
-//=================================================================
-//                         Create chart
-//=================================================================
+//Import CSV using d3.csv import method
+d3.csv("assets/data/data.csv").then(function(data) {
+	// Visualize the data
+	visualize(data);
+  });
 
-d3.csv("data/data.csv").then(data =>{
-	data.forEach( d =>{
-		d.poverty = +d.poverty;
-		d.age = +d.age;
-		d.income = +d.income;
-		d.obesity = +d.obesity;
-		d.smokes = +d.smokes;
-		d.healthcare = +d.healthcare;
+//Create the visualization function. call up function on data from CSV
+function visualize(theData) {
+	//curX and curY set up to determine which data gets highlighted in each axis
+	//designate default x and y here, same headings as .csv file
+var curX = "poverty";
+var curY = "obesity";
+
+//save empty variables for min and max x and y values
+var xMin;
+var xMax;
+var yMin;
+var yMax;
+
+//set up tooltip rules
+var toolTip = d3
+    .tip()
+    .attr("class", "d3-tip")
+    .offset([40, -60])
+    .html(function(d) {
+	  console.log(d)
+	// x key
+	var theX;
+	// state name 
+	var theState = "<div>" + d.state + "</div>";
+	// grab the y value's key and value.
+	var theY = "<div>" + curY + ": " + d[curY] + "%</div>";
+	// If the x key is poverty
+	if (curX === "poverty") {
+	  // Grab the x key and a version of the value formatted to show percentage
+	  theX = "<div>" + curX + ": " + d[curX] + "%</div>";
+	}
+	else {
+        // Otherwise
+        // Grab the x key and a version of the value formatted to include commas after every third digit.
+        theX = "<div>" +
+          curX +
+          ": " +
+          parseFloat(d[curX]).toLocaleString("en") +
+          "</div>";
+	  }
+	  //Display the data captured
+	  return theState + theX + theY;
+});
+//call the toolTip function
+svg.call(toolTip);
+
+//functions set up to remove repetition 
+//change min and max for x
+function xMinMax() {
+    // min function to grab smallest data point from the selected column.
+    xMin = d3.min(theData, function(d) {
+      return parseFloat(d[curX]) * 0.90;
 	});
+	//max function to grab the largest data point from the selected column.
+    xMax = d3.max(theData, function(d) {
+		return parseFloat(d[curX]) * 1.10;
+	  });
+	}
+//change min and max for y
+function yMinMax() {
+    // min function to grab the smallest data point from the selected column.
+    yMin = d3.min(theData, function(d) {
+      return parseFloat(d[curY]) * 0.90;
+    });
 
-	// creating x and y scales
-	var xLinearScale = xScale(data,currentSelectionX),
-		yLinearScale = yScale(data,currentSelectionY);
+    //max function to grab the largest data point from the selected column.
+    yMax = d3.max(theData, function(d) {
+      return parseFloat(d[curY]) * 1.10;
+    });
+  }
 
-	// creating x and y axis
-	var bottomAxis = d3.axisBottom(xLinearScale),
-		leftAxis = d3.axisLeft(yLinearScale);
+//change classes and appearance of label text when clicked
+function labelChange(axis, clickedText) {
+    // Switch the currently active to inactive.
+    d3
+      .selectAll(".aText")
+      .filter("." + axis)
+      .filter(".active")
+      .classed("active", false)
+      .classed("inactive", true);
 
-	// chartgroup - appending x axis
-	var xAxis = chartGroup
-		.append('g')
-		.classed("x-axis", true)
-		.attr('transform',`translate(0, ${height})`)
-		.call(bottomAxis);
+    // Switch the text just clicked to active.
+    clickedText.classed("inactive", false).classed("active", true);
+  }
+
+//Instantiate the scatter plot
+//set up initial data placement to scatter plot
+xMinMax();
+yMinMax();
+
+//create scales
+var xScale = d3
+    .scaleLinear()
+    .domain([xMin, xMax])
+    .range([margin + labelArea, width - margin]);
+  var yScale = d3
+    .scaleLinear()
+    .domain([yMin, yMax])
+    // Height is inverses due to how d3 calc's y-axis placement
+	.range([height - margin - labelArea, margin]);
 	
-	// chartgroup - appending y axis
-	var yAxis = chartGroup.append('g')
-		.call(leftAxis);
+//create axes
+var xAxis = d3.axisBottom(xScale);
+var yAxis = d3.axisLeft(yScale);
 
-	// text on x and y axis //
-	chartGroup.append("text")
-		.attr("transform", `translate(${width - 40},${height - 5})`)
-		.attr("class", "axis-text-main")
-		.text("Demographics")
-	chartGroup.append("text")
-		.attr("transform", `translate(15,60 )rotate(270)`)
-		.attr("class", "axis-text-main")
-		.text("Behavioral Risk Factors")
+//Determine x and y ticks
+function tickCount() {
+    if (width <= 500) {
+      xAxis.ticks(5);
+      yAxis.ticks(5);
+    }
+    else {
+      xAxis.ticks(10);
+      yAxis.ticks(10);
+    }
+  }
+  tickCount();
+
+//append axes
+svg
+    .append("g")
+    .call(xAxis)
+    .attr("class", "xAxis")
+    .attr("transform", "translate(0," + (height - margin - labelArea) + ")");
+svg
+    .append("g")
+    .call(yAxis)
+    .attr("class", "yAxis")
+    .attr("transform", "translate(" + (margin + labelArea) + ", 0)");
+
+//append circles for each state
+theCircles
+    .append("circle")
+    // These attr's specify location, size and class.
+    .attr("cx", function(d) {
+      return xScale(d[curX]);
+    })
+    .attr("cy", function(d) {
+      return yScale(d[curY]);
+    })
+    .attr("r", circRadius)
+    .attr("class", function(d) {
+      return "stateCircle " + d.abbr;
+    })
+    // Hover rules
+    .on("mouseover", function(d) {
+      // Show the tooltip
+      toolTip.show(d, this);
+      // Highlight the state circle's border
+      d3.select(this).style("stroke", "#323232");
+    })
+    .on("mouseout", function(d) {
+      // Remove the tooltip
+      toolTip.hide(d);
+      // Remove highlight
+      d3.select(this).style("stroke", "#e3e3e3");
+	});
 	
+//add labels to state circles
+theCircles
+    .append("text")
+    // abbreviate text.
+    .text(function(d) {
+      return d.abbr;
+    })
+    // place text.
+    .attr("dx", function(d) {
+      return xScale(d[curX]);
+    })
+    .attr("dy", function(d) {
+      // When the size of the text is the radius,
+      // adding a third of the radius to the height      
+      return yScale(d[curY]) + circRadius / 2.5;
+    })
+    .attr("font-size", circRadius)
+    .attr("class", "stateText")
+    // Hover Rules
+    .on("mouseover", function(d) {
+      // Show the tooltip
+      toolTip.show(d);
+      // Highlighting the state circle's border
+      d3.select("." + d.abbr).style("stroke", "#323232");
+    })
+    .on("mouseout", function(d) {
+      // Remove tooltip
+      toolTip.hide(d);
+      // Remove highlight
+      d3.select("." + d.abbr).style("stroke", "#e3e3e3");
+    });
+
+//making the graphic dynamic. user can click on label and it will display data
+d3.selectAll(".aText").on("click", function() {
+	var self = d3.select(this);	
 	
-	// adding circles for the default chart
-	var circlesGroup = chartGroup.selectAll('circle')
-		.data(data)
-		.enter()
-		.append('circle')
-		.classed('stateCircle',true)
-		.attr('cx', d => xLinearScale(d[currentSelectionX]))
-		.attr('cy', d => yLinearScale(d[currentSelectionY]))
-		.attr('r' , 10)
-	
-	// adding state abbreviation text
-	var textGroup = chartGroup.append('g').selectAll('text')
-		.data(data)
-		.enter()
-		.append('text')
-		.classed('stateText',true)
-		.attr('x', d => xLinearScale(d[currentSelectionX]))
-		.attr('y', d => yLinearScale(d[currentSelectionY]))
-		.attr('transform','translate(0,4.5)')
-		.text(d => d.abbr)
+//don't show text on inactive circles
+if (self.classed("inactive")) {
+	// Grab the name and axis saved in label.
+	var axis = self.attr("data-axis");
+	var name = self.attr("data-name");
 
+	//when x is saved, execute
+	if (axis === "x") {
+        // Make curX the same as the data name.
+		curX = name;
+		
+		//change min and max of x axis
+		xMinMax();
 
-	//--- Label group for X-axis ---//
-	var xLabelsGroup = chartGroup
-		.append('g')
-		.attr('transform', `translate(${width / 2}, ${height + 20})`);
-	
-	// Poverty (x-axis)
-	var povertyLabel = xLabelsGroup
-		.append('text')
-		.attr('x', 0)
-		.attr('y', 20)
-		.attr('value', 'poverty')
-		.classed('aText active', true)
-		.text('In Poverty (%)');
-	
-	// Age (x-axis)
-	var ageLabel = xLabelsGroup
-		.append('text')
-		.attr('x', 0)
-		.attr('y', 40)
-		.attr('value', 'age')
-		.classed('aText inactive', true)
-		.text('Age (Median)');
-	
-	// Income (x-axis)
-	var incomeLabel = xLabelsGroup
-		.append('text')
-		.attr('x', 0)
-		.attr('y', 60)
-		.attr('value', 'income')
-		.classed('aText inactive', true)
-		.text('Household Income (Median)');
+		//update x domain
+		xScale.domain([xMin, xMax]);
 
-	//--- Label group for Y-axis ---//
-	var yLabelsGroup = chartGroup.append('g')
+		//transition when updating x axis
+		svg.select(".xAxis").transition().duration(300).call(xAxis);
 
+		//update location of state circles when axis changes
+		d3.selectAll("circle").each(function() {
+			// Each state circle gets a transition for new attribute.
+			d3
+			  .select(this)
+			  .transition()
+			  .attr("cx", function(d) {
+				return xScale(d[curX]);
+			  })
+			  .duration(300);
+		  });
 
-	// HealthCare (y axis)
-	var HealthLabel = yLabelsGroup
-		.append('text')
-		.attr("transform", `translate(-40,${height / 2})rotate(-90)`)
-		.attr('value', 'healthcare')
-		.classed('aText active', true)
-		.text('Lacks Healthcare (%)');
+		//change location of state text when axis changes
+		d3.selectAll(".stateText").each(function() {
+		   d3
+		   .select(this)
+		   .transition()
+		   .attr("dx", function(d) {
+			 return xScale(d[curX]);
+		   })
+		   .duration(300);
+	   });
+ 
+	   //change classes of last active label and clicked label
+	   labelChange (axis, self);
+	}
+	else {
+		curY=name;
 
-	// Smoking (y axis)
-	var smokesLabel = yLabelsGroup
-		.append('text')
-		.attr("transform", `translate(-60,${height / 2})rotate(-90)`)
-		.attr('value', 'smokes')
-		.classed('aText inactive', true)
-		.text('Smokes (%)');
+		//change min and max of y axis
+		yMinMax();
 
-	// Obesity (y axis)
-	var obesityLabel = yLabelsGroup
-		.append('text')
-		.attr("transform", `translate(-80,${height / 2})rotate(-90)`)
-		.attr('value', 'obesity')
-		.classed('aText inactive', true)
-		.text('Obese (%)');
+		//update y domain
+		yScale.domain([yMin, yMax]);
 
-	// Update Tooltip for Circle and Text
-	var circlesGroup = updateToolTip(currentSelectionY,currentSelectionX,circlesGroup,textGroup),
-		textGroup = updateToolTip(currentSelectionY,currentSelectionX,circlesGroup,textGroup);
+		//update y axis
+		svg.select(".yAxis").transition().duration(300).call(yAxis);
 
-	// Create an event listener to call the update functions when a label on X-axis is clicked
-	xLabelsGroup.selectAll('text')
-		.on('click', function() {
-			var value = d3.select(this).attr('value');
-			if (value !== currentSelectionX) {
-				currentSelectionX = value
-
-				xLinearScale = xScale(data, currentSelectionX)
-
-				//xAxis = renderXAxis(xLinearScale, xAxis)
-				xAxis.transition()
-				    .duration(1000)
-				    .ease(d3.easeBack)
-					.call(d3.axisBottom(xLinearScale));
-				
-				/* circlesGroup = renderCircles(
-					circlesGroup,
-					xLinearScale,
-					yLinearScale,
-					currentSelectionX,
-					currentSelectionY
-				); */
-
-				circlesGroup.transition()
-			        .duration(1000)
-			        .ease(d3.easeBack)
-			        .on('start',function(){
-			        	d3.select(this)
-			        		.attr("opacity", 0.50)
-			        		.attr('r',15);
-			        })
-			        .on('end',function(){
-			        	d3.select(this)
-			        		.attr("opacity", 1)
-			        		.attr('r',10)
-			        })
-			        .attr('cx', d => xLinearScale(d[currentSelectionX]));
-
-			    d3.selectAll('.stateText').transition()
-			    	.duration(1000)
-			    	.ease(d3.easeBack)
-			    	.attr('x', d => xLinearScale(d[currentSelectionX]));
-
-				//textGroup = renderText(textGroup, xLinearScale, yLinearScale,  currentSelectionX, currentSelectionY);
-
-				circlesGroup = updateToolTip(currentSelectionY,currentSelectionX,circlesGroup,textGroup),
-				textGroup = updateToolTip(currentSelectionY,currentSelectionX,circlesGroup,textGroup);
-
-				if (currentSelectionX === 'poverty') {
-					povertyLabel
-						.classed('active', true)
-						.classed('inactive', false);
-					incomeLabel
-						.classed('active', false)
-						.classed('inactive', true);
-					ageLabel
-						.classed('active', false)
-						.classed('inactive', true);
-				}
-				else if (currentSelectionX === 'age'){
-					povertyLabel
-						.classed('active', false)
-						.classed('inactive', true);
-					incomeLabel
-						.classed('active', false)
-						.classed('inactive', true);
-					ageLabel
-						.classed('active', true)
-						.classed('inactive', false);
-				}
-				else {
-					povertyLabel
-						.classed('active', false)
-						.classed('inactive', true);
-					incomeLabel
-						.classed('active', true)
-						.classed('inactive', false);
-					ageLabel
-						.classed('active', false)
-						.classed('inactive', true);
-				}
-			}
+		//update location of state circles when axis changes
+		d3.selectAll("circle").each(function(){
+			d3
+				.select(this)
+				.transition()
+				.attr("cy", function(d) {
+					return yScale(d[curY]);
+				})
+				.duration(300);	
 		});
 
-	// Create an event listener to call the update functions when a label on Y-axis is clicked
-	yLabelsGroup.selectAll('text')
-		.on('click', function() {
-			var value = d3.select(this).attr('value');
-			if (value !== currentSelectionY) {
-				currentSelectionY = value
+		//change location of state texts
+		d3.selectAll(".stateText").each(function() {
+			// transitions
+			d3
+			  .select(this)
+			  .transition()
+			  .attr("dy", function(d) {
+				return yScale(d[curY]) + circRadius / 3;
+			  })
+			  .duration(300);
+		  });
 
-				yLinearScale = yScale(data, currentSelectionY)
+		  //change classes of last active label and clicked label
+		  labelChange(axis, self);
+		}	
+	}
+});
 
-				// yAxis = renderYAxis(yLinearScale, yAxis)
-				yAxis.transition()
-				    .duration(1000)
-				    .ease(d3.easeBack)
-					.call(d3.axisLeft(yLinearScale));
+//mobile responsive design
+d3.select(window).on("resize", resize);
 
-				/*circlesGroup = renderCircles(
-					circlesGroup,
-					xLinearScale,
-					yLinearScale,
-					currentSelectionX,
-					currentSelectionY
-				);*/
+  function resize() {
+    // Redefine the width, height and leftTextY 
+    width = parseInt(d3.select("#scatter").style("width"));
+    height = width - width / 3.9;
+    leftTextY = (height + labelArea) / 2 - labelArea;
 
-				circlesGroup.transition()
-			        .duration(1000)
-			        .ease(d3.easeBack)
-			        .on('start',function(){
-			        	d3.select(this)
-			        		.attr("opacity", 0.50)
-			        		.attr('r',15);
-			        })
-			        .on('end',function(){
-			        	d3.select(this)
-			        		.attr("opacity", 1)
-			        		.attr('r',10)
-			        })
-			        .attr('cy', d => yLinearScale(d[currentSelectionY]));
+    // Apply the width and height to the svg canvas.
+    svg.attr("width", width).attr("height", height);
 
-			    d3.selectAll('.stateText').transition()
-			    	.duration(1000)
-			    	.ease(d3.easeBack)
-			    	.attr('y', d => yLinearScale(d[currentSelectionY]))
+    // Change the xScale and yScale ranges
+    xScale.range([margin + labelArea, width - margin]);
+    yScale.range([height - margin - labelArea, margin]);
 
-				// textGroup = renderText(textGroup, xLinearScale, yLinearScale,  currentSelectionX, currentSelectionY);
+    // With the scales changes, update the axes 
+    svg
+      .select(".xAxis")
+      .call(xAxis)
+      .attr("transform", "translate(0," + (height - margin - labelArea) + ")");
 
-				circlesGroup = updateToolTip(currentSelectionY,currentSelectionX,circlesGroup,textGroup),
-				textGroup = updateToolTip(currentSelectionY,currentSelectionX,circlesGroup,textGroup);
+    svg.select(".yAxis").call(yAxis);
 
-				if (currentSelectionY === 'healthcare') {
-					HealthLabel
-						.classed('active', true)
-						.classed('inactive', false);
-					smokesLabel
-						.classed('active', false)
-						.classed('inactive', true);
-					obesityLabel
-						.classed('active', false)
-						.classed('inactive', true);
-				}
-				else if (currentSelectionY === 'obesity'){
-					HealthLabel
-						.classed('active', false)
-						.classed('inactive', true);
-					smokesLabel
-						.classed('active', false)
-						.classed('inactive', true);
-					obesityLabel
-						.classed('active', true)
-						.classed('inactive', false);
-				}
-				else {
-					HealthLabel
-						.classed('active', false)
-						.classed('inactive', true);
-					smokesLabel
-						.classed('active', true)
-						.classed('inactive', false);
-					obesityLabel
-						.classed('active', false)
-						.classed('inactive', true);
-				}
-			}
-		});
-	});
+    // Update the ticks on each axis.
+	tickCount();
+	
+	//update labels
+	xTextRefresh();
+	yTextRefresh();
+
+	//update radius of each dot
+	crGet();
+
+	//update location and radius of state circles
+	d3
+      .selectAll("circle")
+      .attr("cy", function(d) {
+        return yScale(d[curY]);
+      })
+      .attr("cx", function(d) {
+        return xScale(d[curX]);
+      })
+      .attr("r", function() {
+        return circRadius;
+      });
+
+    // We need change the location and size of the state texts, too.
+    d3
+      .selectAll(".stateText")
+      .attr("dy", function(d) {
+        return yScale(d[curY]) + circRadius / 3;
+      })
+      .attr("dx", function(d) {
+        return xScale(d[curX]);
+      })
+      .attr("r", circRadius / 3);
+  }
+}
