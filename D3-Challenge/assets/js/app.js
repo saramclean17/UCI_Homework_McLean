@@ -262,10 +262,13 @@ svg
     .attr("class", "yAxis")
     .attr("transform", "translate(" + (margin + labelArea) + ", 0)");
 
+//declare circles variable
+var theCircles = svg.selectAll("g theCircles").data(theData).enter();
+
 //append circles for each state
 theCircles
     .append("circle")
-    // These attr's specify location, size and class.
+    // Append attributes
     .attr("cx", function(d) {
       return xScale(d[curX]);
     })
