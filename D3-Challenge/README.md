@@ -16,6 +16,6 @@ The scatter plot also shows 3 categories of risk factors:
 2. Smoking
 3. Healthcare Access 
 
-In the scatter plot, comparing obesity and poverty rate shows that Colorado has the lowest obesity rate and a lower poverty rate, though not the lowest. While  West Virginia, Arkansas and Mississippi show the highest obesity rates. Mississippi and New Mexico are highest in poverty rates. 
+In the scatter plot, an example of the data is comparing obesity and poverty rate which shows that Colorado has the lowest obesity rate and a lower poverty rate, though not the lowest. While  West Virginia, Arkansas and Mississippi show the highest obesity rates. Mississippi and New Mexico are highest in poverty rates. Overall, having access to good healthcare and higher incomes in general leads to healthier lives with less instances of risk factors. 
 
 ![image](https://github.com/saramclean17/UCI_Homework_McLean/blob/master/D3-Challenge/Images/7-animated-scatter.gif)
