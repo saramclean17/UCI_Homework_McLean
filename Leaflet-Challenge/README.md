@@ -30,4 +30,6 @@ The first step was to visualize an earthquake data set.
 - Separated out the two different data sets (earthquakes and tectonic plates) into overlays that can be turned on and off independently.
 - Finally layer controls were added to the map.
 
+![image](https://github.com/saramclean17/UCI_Homework_McLean/blob/master/Leaflet-Challenge/images/5-Advanced.png)
+
 Copyright. Sara McLean. 2021 Trilogy Bootcamp
