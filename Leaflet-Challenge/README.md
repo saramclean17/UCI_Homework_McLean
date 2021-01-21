@@ -17,6 +17,7 @@ The first step was to visualize an earthquake data set.
 - Earthquakes with higher magnitudes appear larger and earthquakes with greater depth appear darker in color.
 - Popups that provide additional information about the earthquake were included when a marker is clicked.
 - A legend was created to provide context for the map data.
+![image](https://github.com/saramclean17/UCI_Homework_McLean/blob/master/Leaflet-Challenge/Images/BasicMap.png)
 
 # Step 2--
 # Adding more Data.
