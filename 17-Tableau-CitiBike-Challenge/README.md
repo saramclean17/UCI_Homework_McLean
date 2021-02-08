@@ -8,8 +8,8 @@ I choose the data from the year 2020 for both New York and New Jersey in order t
 
 ## Tableau Set Up
 I created a story dashboard for New York and New Jersey. Here are the links:
-New York: https://public.tableau.com/profile/sara.mclean#!/vizhome/2020_Citi_Bike_Analysis_Overview_NYC/NYCCitiBik
-New Jersey:https://public.tableau.com/profile/sara.mclean#!/vizhome/2020_Citi_Bike_Analysis_Overview_NewJersey/SarasInsight
+* New York: https://public.tableau.com/profile/sara.mclean#!/vizhome/2020_Citi_Bike_Analysis_Overview_NYC/NYCCitiBik
+* New Jersey:https://public.tableau.com/profile/sara.mclean#!/vizhome/2020_Citi_Bike_Analysis_Overview_NewJersey/SarasInsight
 
 ## Analysis
 Two Unexpected Phenomena
